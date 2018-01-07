@@ -81,7 +81,10 @@ ip_addr,md5_str=md5_str)
                         if user_input2=="b":
                             break
                         if user_input2=="q":
-                            sys.exit()
+                            exit_flag=True
+                            break
+            if exit_flag:sys.exit()
+
 
 if __name__=='__main__':
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CrazyAss.settings")
