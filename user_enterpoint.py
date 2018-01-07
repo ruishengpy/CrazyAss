@@ -2,7 +2,7 @@ import getpass,os,subprocess
 import time,hashlib
 
 from django.contrib.auth import authenticate
-
+import sys
 class UserPortal(object):
     '''用户命令行端交互入口'''
 
@@ -80,6 +80,8 @@ ip_addr,md5_str=md5_str)
 
                         if user_input2=="b":
                             break
+                        if user_input2=="q":
+                            sys.exit()
 
 if __name__=='__main__':
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CrazyAss.settings")
