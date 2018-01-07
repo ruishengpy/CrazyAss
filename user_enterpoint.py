@@ -84,8 +84,8 @@ ip_addr,md5_str=md5_str)
                         if user_input2=="q":
                             exit_flag=True
                             break
-                        break
-                    break
+
+
             if exit_flag:sys.exit()
 
 
