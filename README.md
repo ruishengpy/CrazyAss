@@ -25,3 +25,6 @@
 
 # visudo
 # xiaoming ALL=NOPASSWD:/bin/mkdir,/usr/local/bin/strace
+
+
+mkdir logs && chown -R xiaoming. logs
