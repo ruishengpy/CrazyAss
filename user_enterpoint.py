@@ -71,10 +71,11 @@ ip_addr,md5_str=md5_str)
                                 print(login_cmd)
                                 time.sleep(5)
                                 #start session log
-                                models.SessionLog.objects.create(user=self.user,host_user=select_bindhost,session_tag=md5_str)
+                                reault=models.SessionLog.objects.create(user=self.user,host_user=select_bindhost,session_tag=md5_str)
+                                print(reault)
                                 #start session tracker script
                                 session_tracker_script=settings.SESSION_TRACKER_SCRIPT
-                                tracker_obj=subprocess.Popen('%s %s' %(session_tracker_script,md5_str),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+                                tracker_obj=subprocess.Popen('%s %s' %(session_tracker_script,md5_str),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=settings.BASE_DIR)
                                 ssh_instance=subprocess.call(login_cmd,shell=True)
                                 print('''''''''''logout''''''''''''''''''''''''''''''''')
                                 # print('tracker session output:',tracker_obj.stdout.read().decode(),tracker_obj.stderr.read().decode())
