@@ -2,7 +2,7 @@ import getpass,os,subprocess
 import time,hashlib
 
 from django.contrib.auth import authenticate
-
+import sys
 class UserPortal(object):
     '''用户命令行端交互入口'''
 
@@ -44,6 +44,7 @@ class UserPortal(object):
                 print('%s Ungrouped:[%s]'% (index+1,self.user.bind_hosts.select_related().count()))
                 user_input=input('choose Group:').strip()
                 if len(user_input)==0:continue
+                if user_input=='q':break
                 if user_input.isdigit():
                     user_input=int(user_input)
                     if user_input >=0 and user_input< self.user.host_groups.all().count():
@@ -68,16 +69,26 @@ class UserPortal(object):
                                 login_cmd='sshpass -p "{password}" ssh {username}@{ip_addr} -o "StrictHostKeyChecking=no" -Z {md5_str}'.format(password=select_bindhost.host_user.password,username=select_bindhost.host_user.username,ip_addr=select_bindhost.host.
 ip_addr,md5_str=md5_str)
                                 print(login_cmd)
-                                time.sleep(5) 
+                                time.sleep(5)
+                                #start session log
+                                reault=models.SessionLog.objects.create(user=self.user,host_user=select_bindhost,session_tag=md5_str)
+                                print(reault)
                                 #start session tracker script
                                 session_tracker_script=settings.SESSION_TRACKER_SCRIPT
-                                tracker_obj=subprocess.Popen('%s %s' %(session_tracker_script,md5_str),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+                                tracker_obj=subprocess.Popen('%s %s' %(session_tracker_script,md5_str),shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE,cwd=settings.BASE_DIR)
                                 ssh_instance=subprocess.call(login_cmd,shell=True)
-                                print(''''''''''logout''''''''''''''''''''''''''''''''')
-                                print('tracker session output:',tracker_obj.stdout.read().decode(),tracker_obj.stderr.read().decode())
+                                print('''''''''''logout''''''''''''''''''''''''''''''''')
+                                # print('tracker session output:',tracker_obj.stdout.read().decode(),tracker_obj.stderr.read().decode())
 
                         if user_input2=="b":
                             break
+                        if user_input2=="q":
+                            exit_flag=True
+                            break
+
+
+            if exit_flag:sys.exit()
+
 
 if __name__=='__main__':
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "CrazyAss.settings")

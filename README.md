@@ -1,4 +1,5 @@
 # CrazyAss
+<<<<<<< HEAD
 613  again:
 614         while ((opt = getopt(ac, av, "1246ab:c:e:fgi:kl:m:no:p:qstvxz:"
 615             "ACD:E:F:GI:J:KL:MNO:PQ:R:S:TVw:W:XYyZ:")) != -1) {
@@ -23,5 +24,5 @@
 
 
 
-visudo
-xiaoming ALL=NOPASSWD:/bin/mkdir,/usr/local/bin/strace
+# visudo
+# xiaoming ALL=NOPASSWD:/bin/mkdir,/usr/local/bin/strace

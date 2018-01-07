@@ -1,4 +1,5 @@
-#echo #print 
+#!/usr/bin/env bash
+#echo #print
 #echo $1 $2 
 md5_str=$1
 
@@ -29,3 +30,4 @@ for i in $(seq 1 30);do
 
 
 done;
+
