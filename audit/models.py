@@ -138,8 +138,8 @@ class BindHost(models.Model):
 
 class SessionLog(models.Model):
     """存储session日志"""
-    user = models.ForeignKey("UserProfile")
-    host_user = models.ForeignKey("BindHost")
+    user = models.ForeignKey("UserProfile",on_delete=models.CASCADE,)
+    host_user = models.ForeignKey("BindHost",on_delete=models.CASCADE,)
     session_tag = models.CharField(max_length=128,unique=True)
     date = models.DateTimeField(auto_now_add=True)
     def __str__(self):
