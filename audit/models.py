@@ -137,9 +137,10 @@ class BindHost(models.Model):
 
 
 class SessionLog(models.Model):
-    user=models.ForeignKey("UserProfile")
-    host_user=models.ForeignKey("BindHost")
-    session_tag=models.CharField(max_length=128,unique=True)
-    date=models.DateTimeField(auto_now_add=True)
+    """存储session日志"""
+    user = models.ForeignKey("UserProfile")
+    host_user = models.ForeignKey("BindHost")
+    session_tag = models.CharField(max_length=128,unique=True)
+    date = models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return self.session_tag
