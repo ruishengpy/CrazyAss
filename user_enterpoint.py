@@ -44,6 +44,7 @@ class UserPortal(object):
                 print('%s Ungrouped:[%s]'% (index+1,self.user.bind_hosts.select_related().count()))
                 user_input=input('choose Group:').strip()
                 if len(user_input)==0:continue
+                if user_input=='q':break
                 if user_input.isdigit():
                     user_input=int(user_input)
                     if user_input >=0 and user_input< self.user.host_groups.all().count():
